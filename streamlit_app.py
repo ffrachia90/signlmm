@@ -50,6 +50,10 @@ def extract_features(video_path):
     """
     Convierte un video en un 'Vector de Características' (Huella digital numérica).
     """
+    if not AI_AVAILABLE:
+        st.error("❌ El motor de IA no pudo iniciarse en este servidor. Revisa los logs.")
+        return None
+
     cap = cv2.VideoCapture(video_path)
     
     x_movements = []
