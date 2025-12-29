@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Data (muy pesado para git)
+data/
+models/
+
+# Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+
+# Temp
+*.tmp
+.temp/
+
+# Secrets
+.env
+*.env
+secrets/
+
+# Build
+netlify_deploy/
+
