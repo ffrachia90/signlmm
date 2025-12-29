@@ -1,0 +1,66 @@
+# SignLMM POC Configuration
+# =========================
+
+project:
+  name: "SignLMM-POC"
+  version: "0.1.0"
+  description: "Proof of Concept - Sign Language Multimodal Model"
+
+# Data settings
+data:
+  videos_dir: "data/videos"
+  landmarks_dir: "data/landmarks"
+  processed_dir: "data/processed"
+  
+  # Video specs
+  video:
+    fps: 30
+    min_resolution: [720, 480]
+    max_duration_seconds: 10
+  
+  # Landmarks settings
+  landmarks:
+    sequence_length: 60  # frames (normalized)
+    include_face: false  # solo manos y pose por ahora
+    
+  # Dataset split
+  split:
+    train: 0.8
+    test: 0.2
+    random_seed: 42
+
+# Model settings
+model:
+  type: "lstm"  # opciones: lstm, transformer, videomae
+  
+  lstm:
+    input_size: 225  # 75 puntos x 3 coordenadas
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.3
+    bidirectional: true
+  
+  training:
+    epochs: 100
+    batch_size: 32
+    learning_rate: 0.001
+    early_stopping_patience: 10
+
+# Sign language settings
+sign_language:
+  language: "LSA"  # LSA, LSE, LSU
+  num_classes: 50  # señas en la POC
+  
+# LLM settings for translation
+llm:
+  provider: "openai"  # openai, local, gemini
+  model: "gpt-3.5-turbo"
+  temperature: 0.3
+  
+# Demo settings
+demo:
+  host: "0.0.0.0"
+  port: 7860
+  share: false  # true para URL pública
+
+
