@@ -12,15 +12,21 @@ st.set_page_config(page_title="SignLMM POC - Interactive", page_icon="🤟", lay
 st.title("🤟 SignLMM - Plataforma de Entrenamiento")
 st.markdown("### Ciclo completo: Recolección de Datos -> Entrenamiento -> Inferencia")
 
-# Inicializar MediaPipe (Importación directa anti-fallos)
-import mediapipe as mp
+# Inicialización Robusta de MediaPipe
+AI_AVAILABLE = False
+mp_holistic = None
+mp_drawing = None
+
 try:
-    from mediapipe.python.solutions import holistic as mp_holistic
-    from mediapipe.python.solutions import drawing_utils as mp_drawing
-except ImportError:
-    # Fallback por si la estructura cambia
+    import mediapipe as mp
     mp_holistic = mp.solutions.holistic
+    # Dummy call to trigger lazy loading error inside try block
+    _ = mp_holistic.Holistic
     mp_drawing = mp.solutions.drawing_utils
+    AI_AVAILABLE = True
+except Exception as e:
+    print(f"⚠️ Error cargando MediaPipe: {e}")
+    # No crasheamos, solo marcamos como no disponible
 
 # --- GESTIÓN DE DATASET (Base de Conocimiento) ---
 DATA_FILE = "dataset_references.json"
