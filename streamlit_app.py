@@ -12,9 +12,9 @@ st.set_page_config(page_title="SignLMM POC - Interactive", page_icon="🤟", lay
 st.title("🤟 SignLMM - Plataforma de Entrenamiento")
 st.markdown("### Ciclo completo: Recolección de Datos -> Entrenamiento -> Inferencia")
 
-# Inicializar MediaPipe de forma explícita
-import mediapipe.python.solutions.holistic as mp_holistic
-import mediapipe.python.solutions.drawing_utils as mp_drawing
+# Inicializar MediaPipe
+mp_holistic = mp.solutions.holistic
+mp_drawing = mp.solutions.drawing_utils
 
 # --- GESTIÓN DE DATASET (Base de Conocimiento) ---
 DATA_FILE = "dataset_references.json"
